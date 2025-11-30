@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
+/* Base theme variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: hsl(0, 0%, 100%);
+  --foreground: #000000;
 }
 
 @theme inline {
@@ -14,13 +15,633 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 }
 
+/* Global reset and body styles */
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: #201e21;
+  color: #ffffff;
+}
+
+/* Layout shell */
+.layout-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-main-row {
+  flex: 1;
+  display: flex;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.main-content h1 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* TOP BAR */
+.topbar {
+  padding: 8px 10px;
+  background-color: #131313;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+}
+
+.topbar-left,
+.topbar-right {
+  display: flex;
+  align-items: flex-start;
+}
+
+.logo-box {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+
+.user-label {
+  font-size: 0.85rem;
+}
+
+.topbar-bottom {
+  padding: 8px 2px;
+  background-color: #131313;
+  border-bottom: 1px solid #333333;
+  text-align: center;
+}
+
+.app-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
+/* STUDY CONTROL bar at the top */
+
+.study-search-input {
+  width: 100%;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid #ffffff;
+  background-color: #101010;
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
+.controls-bar {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 3fr 1fr 1fr;
+  gap: 8px;
+  padding: 8px 8px;
+  background-color: #111111;
+  border-bottom: 1px solid #333333;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* each column box */
+.controls-column {
+  border: 1px solid #555555;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.controls-column h4 {
+  margin: 0 0 6px 0;
+  font-size: 0.85rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* left study section in controls bar */
+.controls-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.controls-section-title {
+  font-size: 0.8rem;
+  margin: 0 0 8px 0;
+}
+
+/* shared vertical buttons in controls bar */
+.controls-vertical-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.controls-vertical-buttons button {
+  width: 100%;
+  padding: 4px 6px;
+  height: 28px;
+  background-color: #222222;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Topics to Study layout */
+.controls-topics-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+/* left side (buttons) inside Topics column */
+.controls-topics-row .controls-vertical-buttons {
+  flex: 0 0 32%;
+}
+
+/* right side: input area inside Topics column */
+.controls-topics-boxes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* label + textarea stack */
+.controls-input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* small label text above each textarea */
+.controls-input-label {
+  font-size: 0.75rem;
+  color: #dddddd;
+}
+
+/* text input for topics and courses */
+.controls-text-input {
+  width: 100%;
+  max-height: 48px;
+  min-height: 48px;
+  padding: 6px 10px;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #ffffff;
+  background-color: #101010;
+  resize: vertical;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.controls-text-input::placeholder {
+  color: #aaaaaa;
+}
+
+/* Save / Reset column */
+.controls-save-reset {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+}
+
+.save-btn,
+.reset-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  background-color: #222222;
+  color: #ffffff;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+
+
+/* SIDE BAR */
+.sidebar {
+  width: 200px;
+  padding: 20px;
+  background-color: #191919;
+  text-align: start;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 40px;
+}
+
+.sidebar-share-btn {
+  margin-top: 40px;
+}
+
+/* BODY - Study timer center area */
+.study-main {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.study-title {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.study-subtitle {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 0.85rem;
+}
+
+.study-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.timer-buttons-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.timer-btn {
+  padding: 10px 24px;
+  border-radius: 20px;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.timer-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.timer-circle {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Timer state indicator icons */
+.timer-indicator {
+  position: absolute;
+  top: 20px;
+  font-size: 18px;
+}
+
+.timer-indicator.running {
+  color: #19c15f;
+}
+
+.timer-indicator.paused {
+  color: #a0a0a0;
+}
+
+.timer-indicator.stopped {
+  color: #ff3b3b;
+}
+
+.timer-time {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.timer-label {
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.timer-status {
+  padding: 10px 24px;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+  font-size: 0.85rem;
+  margin-top: 30px;
+  width: 120%;
+}
+
+/* SETTINGS PANEL on the right */
+.settings-panel {
+  width: 120px;
+  padding: 16px;
+  background-color: #111111;
+  border-left: 1px solid #333333;
+  font-size: 0.85rem;
+}
+
+.settings-panel h4 {
+  margin-top: 50px;
+  margin-bottom: 12px;
+}
+
+.settings-section {
+  margin-bottom: 16px;
+}
+
+.settings-section p {
+  margin: 0 0 6px 0;
+}
+
+.settings-section button {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 50px;
+  height: 25px;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #222222;
+  border: 1px solid #444444;
+  margin: 8px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* BOTTOM SUMMARY BAR */
+.bottom-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  column-gap: 8px;
+  padding: 10px 20px;
+  min-height: 50px;
+  max-height: 50px;
+  background-color: #111111;
+  border-top: 1px solid #333333;
+  font-size: 0.85rem;
+}
+
+.bottom-summary-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bottom-summary-buttons button {
+  padding: 4px 10px;
+  width: 60px;
+  border-radius: 8px;
+  background-color: #222222;
+  border: 1px solid #444444;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+
+.bottom-summary-poptext {
+  text-align: end;
+}
+
+
+.bottom-summary-right {
+  text-align: start;
+}
+
+
+
+
+/* FOOTER LAYOUT */
+.footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  padding: 10px 20px;
+  background-color: #131313;
+  color: #ffffff;
+  font-size: 0.85rem;
+  align-items: center;
+  border-top: 1px solid #333333;
+}
+
+/* left, center, right */
+.footer-right {
+  text-align: end;
+}
+
+
+/* support button */
+.footer-support-btn {
+  background-color: #222;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  cursor: pointer;
+  right: 20px;
+}
+
+/* FLOATING POPUP BANNER (DETACHED FROM FOOTER) */
+.support-floating-banner {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 260px;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  padding: 14px;
+  border-radius: 10px;
+  z-index: 2000;
+}
+
+.support-title {
+  margin: 0 0 10px;
+  font-weight: bold;
+  right: 20px;
+}
+
+.support-option {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: #222;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.support-option.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.support-close {
+  width: 100%;
+  padding: 8px;
+  background-color: transparent;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+
+/* Responsive settings */
+@media (max-width: 1100px) {
+  .controls-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .layout-main-row {
+    flex-direction: column;
+  }
+
+  /* Settings panel*/
+  .settings-panel {
+    width: 100%;
+    border-left: none;
+    max-height: fit-content;
+    min-height: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 12px 10px;
+  }
+
+  /* Each section - vertical block */
+  .settings-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .settings-section p {
+    margin: 0 0 6px 0;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .settings-section button {
+    width: 60px;
+    height: 25px;
+  }
+
+  .settings-section label,
+  .settings-section input {
+    font-size: 0.85rem;
+  }
+
+
+  /* Bottom summary */
+  .bottom-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: fit-content;
+    min-height: fit-content;
+    gap: 50px;
+  }
+
+  /* Timer layout - vertical */
+  .study-layout {
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  /* Study Hub on mobile */
+  .sidebar-nav {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+    text-align: center;
+  }
+
+  /* Sidebar full width */
+  .sidebar {
+    width: 100%;
+    max-height: fit-content;
+  }
+
+  .sidebar ul li {
+    margin-bottom: 20px;
+  }
+
+  .sidebar-share-btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* TOPICS TO STUDY */
+  .controls-topics-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+
+  .controls-topics-row .controls-vertical-buttons,
+  .controls-topics-boxes {
+    width: 100%;
+  }
+
+  .controls-vertical-buttons button {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    row-gap: 6px;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .footer-left,
+  .footer-right {
+    width: 100%;
+    text-align: end;
+  }
+
+
 }
