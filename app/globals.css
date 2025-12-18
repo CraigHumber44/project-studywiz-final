@@ -1360,7 +1360,7 @@ body {
   resize: vertical;
 }
 
-/* UPDATED: make spacing consistent whether list or empty state */
+/* make spacing consistent whether list or empty state */
 .materials-notes-actions {
   margin-top: 10px;
   margin-bottom: 12px;
@@ -1403,7 +1403,7 @@ body {
   gap: 4px;
 }
 
-/* UPDATED: keep the same top spacing as .materials-list so the gap looks identical */
+/* keep the same top spacing as .materials-list so the gap looks identical */
 .materials-empty {
   margin-top: 12px;
   /* added */
@@ -2210,7 +2210,7 @@ body {
     display: none !important;
   }
 
-  /* Also remove the heart icon on mobile (even if it exists outside the collapsed list) */
+  /* remove the heart icon on mobile (even if it exists outside the collapsed list) */
   .sidebar .sidebar-heart,
   .sidebar .share-icon,
   .sidebar .favorite-icon {
