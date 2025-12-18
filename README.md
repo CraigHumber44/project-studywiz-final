@@ -1,49 +1,30 @@
-StudyWiz – Group Project Phase 2
+# StudyWiz – Smart Study Planner and Tracker (Phase 3)
 
-Summary
-Phase 2 focuses on setting up the core structure, layout, navigation, state management, and responsive styling for the StudyWiz application. The goal of this phase is not to complete full functionality but to establish a strong foundation that will support all advanced logic in Phase 3.
-All required pages were created using the Next.js routing system, and major UI components were structured cleanly for reuse. The project now includes a fully designed dark theme, modular interface components, state based rendering, and mobile friendly behavior. Together, these elements demonstrate a solid intermediate level implementation of the project.
+StudyWiz is a smart study planner and tracker developed as the final group project for CPAN 144 (Advanced Front-End Programming). The goal of this application is to help students plan, manage, and track their study sessions in a structured and user-friendly way.
 
-Detailed Explanation
-This phase established the main structure of the Smart Study Planner and Tracker using Next.js file-based routing. All required pages (Home, Studies, Materials, Overview, Due Dates) are set up and load correctly with placeholder content. Navigation is handled through the Sidebar, giving users consistent access to each section of the application.
+The app allows users to set study time frames, select topics and priorities, and run timed study sessions using a built-in timer. After each session, users can review and manage completed sessions while keeping the interface clean through conditional rendering.
 
-A complete component layout was created, including:
-•	TopBar and TopBarBottom for title display and header organization
-•	StudyControlsBar for selecting study time frames, dates, topics, and priority
-•	Sidebar for user navigation
-•	TimerPanel with Start, Pause, Stop, and Reset actions
-•	SettingsPanel for theme, auto pause, and notifications
-•	BottomSummaryBar for tracking completed study sessions
-•	Footer with a floating Support banner
-Styling was implemented using a dark theme with consistent spacing, flexible grid and flex layouts, and responsive behavior for mobile screens.
-State management is now active in multiple components. The TimerPanel updates based on user actions, and the BottomSummaryBar uses conditional rendering to show the Save, No, and Delete buttons only after a session ends.
-The entire project is well structured and prepared for Phase 3, where full functionality will be implemented.
+## Key Features
+- StudyControlsBar for selecting study time frames, topics, dates, and priorities
+- TimerPanel with start, pause, stop, and reset functionality
+- Sidebar navigation across Home, Studies, Materials, Overview, and Due Dates
+- BottomSummaryBar that appears only after a session is completed
+- Responsive dark-themed user interface
 
+## Technologies Used
+- Next.js with React
+- Component-based architecture
+- React Hooks (useState, useEffect) for state management
+- CSS Modules for styling and responsive layout
 
+## Project Structure
+The application uses Next.js file-based routing and a modular folder structure to keep components reusable and maintainable. Shared state is managed through lifted state and props to ensure consistent data flow across components.
 
-Phase 2 Checklist
-•	Routing and Structure
-o	Routing implemented for Home, Studies, Materials, Overview, Due Dates
-o	Sidebar navigation created and functioning
-o	Project file structure organized into app, components, and public
+## Phase 3 Focus
+Phase 3 focused on finalizing component behavior, refining UI responsiveness, cleaning up logic and state flow, and preparing the project for future performance optimizations. While not all advanced features were implemented, the current structure supports future expansion.
 
-•	Components Implemented
-o	TopBar and TopBarBottom with centered application title
-o	StudyControlsBar with time frame, date, topic, and priority controls
-o	TimerPanel with Start, Pause, Stop, Reset
-o	SettingsPanel with theme, auto pause, notifications
-o	BottomSummaryBar with conditional Save, No, Delete buttons
-o	Footer with Support button and floating support banner
+## Limitations and Future Improvements
+Due to time constraints, some planned features such as AI-generated study questions, advanced analytics, external API integration, and backend persistence were not fully implemented. These features are planned for future versions of the application.
 
-•	Styling and Responsiveness
-o	Dark theme UI applied across all pages
-o	Consistent spacing and layout alignment
-o	Responsive design for mobile screens
-o	Sidebar collapses properly on smaller devices
-o	Control bar rearranges into mobile layout
-
-•	State Management
-o	Timer state for running, paused, and stopped modes
-o	BottomSummaryBar state for tracking completed topics
-o	Conditional rendering used for session action buttons
-
+## Course Concepts Demonstrated
+This project demonstrates key CPAN 144 concepts including component-based design, state management with React Hooks, conditional rendering, event handling, responsive UI design, and scalable project organization.
