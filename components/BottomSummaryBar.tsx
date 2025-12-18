@@ -1,54 +1,84 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { useApp } from "@/components/AppProvider";
+import { saveSession } from "@/lib/studySessionsStore";
+
+function fmtHM(totalSeconds: number) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60);
+    const hh = String(hours).padStart(2, "0");
+    const mm = String(mins).padStart(2, "0");
+    return `${hh}hr ${mm}min`;
+}
 
 export default function BottomSummaryBar() {
-    const [completedTopics, setCompletedTopics] = useState(0);
-    const [showSessionActions, setShowSessionActions] = useState(false);
+    const { user, pendingSession, savePendingSession, discardPendingSession, totalSecondsThisWeek, savedStudies } = useApp();
 
-    useEffect(() => {
-        function handleSessionStopped() {
-            setCompletedTopics(prev => prev + 1);
-            setShowSessionActions(true);
-        }
+    const completedTopics = useMemo(() => {
+        // Only count real saved sessions (not planner saves)
+        return savedStudies.filter((s) => (s.durationSeconds || 0) > 0).length;
+    }, [savedStudies]);
 
-        window.addEventListener("studySessionStopped", handleSessionStopped);
-        return () => {
-            window.removeEventListener("studySessionStopped", handleSessionStopped);
-        };
-    }, []);
-
-    function handleDelete() {
-        setCompletedTopics(0);
-        setShowSessionActions(false);
-    }
+    const showSessionActions = !!pendingSession;
 
     return (
         <section className="bottom-summary">
-
-            {/* LEFT (total hours display) */}
             <div className="bottom-summary-right">
-                <strong>Total hours studied this week:</strong> 00hr 00min
+                <strong>Total hours studied this week:</strong> {fmtHM(totalSecondsThisWeek)}
             </div>
 
-            {/* CENTER */}
             <div className="bottom-summary-center">
                 <strong className="bottom-summary-poptext">
-                    You have completed studying {completedTopics}{" "}
-                    {completedTopics === 1 ? "topic" : "topics"}.
+                    You have completed studying {completedTopics} {completedTopics === 1 ? "topic" : "topics"}.
                 </strong>
 
-                {showSessionActions && (
-                    <span> Do you want to save this session?</span>
-                )}
+                {showSessionActions && <span> Do you want to save this session?</span>}
             </div>
 
-            {/* RIGHT (action buttons) */}
             {showSessionActions && (
                 <div className="bottom-summary-buttons">
-                    <button>Yes</button>
-                    <button>No</button>
-                    <button onClick={handleDelete}>Delete</button>
+                    <button
+                        className="bottom-yes-button"
+                        type="button"
+                        onClick={() => {
+                            // keep a snapshot before savePendingSession clears it
+                            const snap = pendingSession;
+
+                            const res = savePendingSession();
+                            if (!res.ok) {
+                                alert(res.message);
+                                return;
+                            }
+
+                            // analytics store is user scoped, so only save if logged in
+                            if (user?.email && snap) {
+                                saveSession(user.email, snap.durationSeconds, snap.endedAt);
+                            }
+                        }}
+                    >
+                        Yes
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={() => {
+                            // No = dont save, just discard the pending session
+                            discardPendingSession();
+                        }}
+                    >
+                        No
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={() => {
+                            // Delete = same behavior for now (discard)
+                            discardPendingSession();
+                        }}
+                    >
+                        Delete
+                    </button>
                 </div>
             )}
         </section>

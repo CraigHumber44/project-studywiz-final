@@ -6,37 +6,31 @@ import Footer from "@/components/Footer";
 import StudyControlsBar from "@/components/StudyControlsBar";
 import SettingsPanel from "@/components/SettingsPanel";
 import BottomSummaryBar from "@/components/BottomSummaryBar";
+import { AppProvider } from "@/components/AppProvider";
 
 export const metadata = {
   title: "StudyWiz",
   description: "Smart Study Planner and Tracker",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="layout-root">
-        <TopBar />
+        <AppProvider>
+          <TopBar />
+          <TopBarBottom />
+          <StudyControlsBar />
 
-        <TopBarBottom />
+          <div className="layout-main-row">
+            <Sidebar />
+            <main className="main-content">{children}</main>
+            <SettingsPanel />
+          </div>
 
-        {/* top controls row */}
-        <StudyControlsBar />
-
-        {/* main row with sidebar, content, settings */}
-        <div className="layout-main-row">
-          <Sidebar />
-          <main className="main-content">{children}</main>
-          <SettingsPanel />
-        </div>
-
-        {/* bottom bar and footer */}
-        <BottomSummaryBar />
-        <Footer />
+          <BottomSummaryBar />
+          <Footer />
+        </AppProvider>
       </body>
     </html>
   );
